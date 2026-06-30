@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>China Travel Guide</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+      <div class="nav-inner">
+        <span class="logo">🏯 China Travel Guide</span>
+      </div>
+    </header>
+
+    <!-- 消息展示列表 -->
+    <main class="chat-area" ref="chatArea">
+      <div class="messages" v-if="messages.length > 0">
+        <div v-for="(msg, idx) in messages" :key="idx" class="msg" :class="msg.role">
+          <div class="avatar">{{ msg.role === "user" ? "👤" : "🏯" }}</div>
+          <div class="bubble">{{ msg.content }}</div>
+        </div>
+        <div class="msg assistant" v-if="streaming">
+          <div class="avatar">🏯</div>
+          <div class="bubble streaming">{{ streamingText }}<span class="cursor">|</span></div>
+        </div>
+      </div>
+
+      <!-- 空状态 -->
+      <div class="empty" v-else>
+        <div class="empty-icon">🏯</div>
+        <h2>Welcome to China Travel Guide</h2>
+        <p>Ask me anything about traveling in China — attractions, food, culture, visas, and itinerary planning.</p>
+      </div>
+    </main>
+
+    <!-- 底部输入区 -->
+    <footer class="input-bar">
+      <div class="input-inner">
+        <input
+          type="text"
+          v-model="question"
+          @keyup.enter="sendQuestion"
+          placeholder="Ask about China travel..."
+          :disabled="loading"
+          maxlength="500"
+        />
+        <button @click="sendQuestion" :disabled="loading || !question.trim()">
+          {{ loading ? "..." : "Send" }}
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
