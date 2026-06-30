@@ -1,5 +1,5 @@
 // ===== 配置 =====
-const API_URL = "http://localhost:8000/api/chat";
+const API_URL = "https://chinatravel-guides-production.up.railway.app/api/chat";
 
 // ===== Vue 3 应用 =====
 const app = Vue.createApp({
