@@ -3,56 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>China Travel Guide</title>
+  <title>China Travel Guide — Explore China</title>
+  <meta name="description" content="Your AI-powered guide to traveling in China. Discover cities, culture, cuisine, and plan your perfect trip with 240-hour visa-free transit.">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
   <div id="app">
-    <!-- 顶部导航栏 -->
-    <header class="navbar">
+
+    <!-- ===== 毛玻璃导航栏 ===== -->
+    <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
       <div class="nav-inner">
-        <span class="logo">🏯 China Travel Guide</span>
-      </div>
-    </header>
-
-    <!-- 消息展示列表 -->
-    <main class="chat-area" ref="chatArea">
-      <div class="messages" v-if="messages.length > 0">
-        <div v-for="(msg, idx) in messages" :key="idx" class="msg" :class="msg.role">
-          <div class="avatar">{{ msg.role === "user" ? "👤" : "🏯" }}</div>
-          <div class="bubble">{{ msg.content }}</div>
-        </div>
-        <div class="msg assistant" v-if="streaming">
-          <div class="avatar">🏯</div>
-          <div class="bubble streaming">{{ streamingText }}<span class="cursor">|</span></div>
+        <a href="#" class="nav-logo">
+          <span class="nav-logo-icon">✈️</span>
+          <span class="nav-logo-text">China Travel</span>
+        </a>
+        <div class="nav-links">
+          <a href="#cities" class="nav-link">Cities</a>
+          <a href="#visa" class="nav-link">Visa</a>
+          <a href="#chat" class="nav-link">Ask AI</a>
         </div>
       </div>
+    </nav>
 
-      <!-- 空状态 -->
-      <div class="empty" v-else>
-        <div class="empty-icon">🏯</div>
-        <h2>Welcome to China Travel Guide</h2>
-        <p>Ask me anything about traveling in China — attractions, food, culture, visas, and itinerary planning.</p>
+    <!-- ===== Hero 全屏区 ===== -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Explore China.<br>Your Way.</h1>
+        <p class="hero-subtitle">From the Great Wall to hidden alleyways — let AI craft your perfect journey across China's most incredible cities.</p>
+        <div class="hero-actions">
+          <a href="#chat" class="btn btn-primary">Start Planning</a>
+          <a href="#cities" class="btn btn-outline">Explore Cities</a>
+        </div>
       </div>
-    </main>
+      <div class="hero-scroll-hint">
+        <span>Scroll to discover</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
 
-    <!-- 底部输入区 -->
-    <footer class="input-bar">
-      <div class="input-inner">
-        <input
-          type="text"
-          v-model="question"
-          @keyup.enter="sendQuestion"
-          placeholder="Ask about China travel..."
-          :disabled="loading"
-          maxlength="500"
-        />
-        <button @click="sendQuestion" :disabled="loading || !question.trim()">
-          {{ loading ? "..." : "Send" }}
-        </button>
+    <!-- ===== 城市导览区 ===== -->
+    <section id="cities" class="section section--light">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Destinations</span>
+          <h2 class="section-title">10+ Cities, Infinite Stories</h2>
+          <p class="section-desc">Each city is a world of its own. Dive into Beijing's imperial grandeur, Shanghai's futuristic skyline, Chengdu's spicy alleys, and more.</p>
+        </div>
+        <div class="city-grid">
+          <div class="city-card" v-for="(city, idx) in cities" :key="idx">
+            <div class="city-img" :style="{ backgroundImage: 'url(' + city.img + ')' }"></div>
+            <div class="city-info">
+              <h3 class="city-name">{{ city.name }}</h3>
+              <p class="city-highlight">{{ city.highlight }}</p>
+              <div class="city-tags">
+                <span class="tag" v-for="tag in city.tags" :key="tag">{{ tag }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-extra">
+          <p><strong>240-hour visa-free transit</strong> now covers 55 countries across 65 ports — explore multiple cities on a single trip.</p>
+          <a href="#visa" class="link-arrow">Learn about visa policy →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 签证政策区 ===== -->
+    <section id="visa" class="section section--dark">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Visa Policy</span>
+          <h2 class="section-title">240-Hour Visa-Free Transit</h2>
+          <p class="section-desc">China's expanded visa-free policy lets travelers from 55 countries explore up to 24 provinces without a visa. Stay up to 10 days.</p>
+        </div>
+        <div class="visa-stats">
+          <div class="stat">
+            <span class="stat-num">55</span>
+            <span class="stat-label">Eligible Countries</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">65</span>
+            <span class="stat-label">Ports of Entry</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">240</span>
+            <span class="stat-label">Hours (10 Days)</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">24</span>
+            <span class="stat-label">Provinces Open</span>
+          </div>
+        </div>
+        <div class="visa-info-card">
+          <p>Perfect for stopovers or short trips. Enter through Beijing, Shanghai, Guangzhou, Chengdu, and more — then travel freely across multiple cities within the permitted region.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AI 智能问答区 ===== -->
+    <section id="chat" class="section section--chat">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">AI Travel Assistant</span>
+          <h2 class="section-title">Ask Anything About China</h2>
+          <p class="section-desc">Planning an itinerary? Need restaurant tips? Curious about local customs? Our AI knows China inside out.</p>
+        </div>
+
+        <!-- 聊天界面 -->
+        <div class="chat-container">
+          <div class="chat-messages" ref="chatArea">
+            <!-- 消息列表 -->
+            <div v-if="messages.length > 0" class="msg-list">
+              <div v-for="(msg, idx) in messages" :key="idx" class="msg-row" :class="'msg--' + msg.role">
+                <div class="msg-avatar">{{ msg.role === 'user' ? '👤' : '✈️' }}</div>
+                <div class="msg-bubble">{{ msg.content }}</div>
+              </div>
+              <!-- 流式输出 -->
+              <div v-if="streaming" class="msg-row msg--assistant">
+                <div class="msg-avatar">✈️</div>
+                <div class="msg-bubble msg-bubble--streaming">{{ streamingText }}<span class="cursor">|</span></div>
+              </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div v-else class="chat-empty">
+              <p>Try asking:</p>
+              <button class="q-chip" v-for="(q, idx) in sampleQuestions" :key="idx" @click="quickQuestion(q)">{{ q }}</button>
+            </div>
+          </div>
+
+          <div class="chat-input-bar">
+            <input
+              type="text"
+              v-model="question"
+              @keyup.enter="sendQuestion"
+              placeholder="Ask about China travel..."
+              :disabled="loading"
+              maxlength="500"
+              class="chat-input"
+            />
+            <button @click="sendQuestion" :disabled="loading || !question.trim()" class="chat-send-btn">
+              <span v-if="!loading">Send</span>
+              <span v-else>...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 底部 ===== -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <span class="footer-logo">✈️ China Travel Guide</span>
+          <p class="footer-desc">Your AI-powered companion for exploring China. Built for travelers, by travelers.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <a href="#cities" class="footer-link">Cities</a>
+          <a href="#visa" class="footer-link">Visa Policy</a>
+          <a href="#chat" class="footer-link">AI Assistant</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Resources</h4>
+          <a href="#" class="footer-link">Travel Tips</a>
+          <a href="#" class="footer-link">Packing Guide</a>
+          <a href="#" class="footer-link">Emergency Contacts</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 China Travel Guide. Not affiliated with any government agency.</p>
       </div>
     </footer>
+
   </div>
 
   <script src="js/main.js"></script>

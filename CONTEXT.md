@@ -1,32 +1,34 @@
 # CONTEXT.md
 
 ## 当前进度
-- 项目骨架：已完成（.gitignore + 目录结构）
-- 后端核心代码：已完成
-- 前端页面：基础框架已完成
-- 部署修复：已完成（Procfile + requirements.txt）
+- 项目骨架：已完成
+- 后端核心代码：已完成（Railway 部署运行中）
+- 前端 UI：**已完成 Apple 风格改版**
 
 ## 已完成
-1. 项目基础结构搭建（.gitignore + 目录结构）
-2. 后端代码：FastAPI 入口 + CORS + DeepSeek API 封装 + 聊天路由
-3. 前端代码：Vue 3 CDN 页面 + 响应式样式 + SSE 流式交互
-4. 部署修复：
-   - 根目录 requirements.txt 添加 uvicorn[standard]>=0.34
-   - Procfile 修正：删除末尾反斜杠，使用 \ 变量
-   - 已推送到 GitHub，Railway 应自动重部署
+1. 项目基础结构搭建
+2. 后端代码：FastAPI + CORS + DeepSeek API + 聊天路由（已部署 Railway）
+3. 前端 UI 改版（对标 Apple.com 风格）：
+   - 毛玻璃固定导航栏（backdrop-filter blur）
+   - 全屏 Hero 区 + 渐变遮罩 + Unsplash 背景图
+   - 城市导览卡片区（6城市网格，hover动效）
+   - 240小时免签政策区（4个数据指标 + 说明卡片，深色背景）
+   - AI聊天区（保持SSE流式交互，重新设计了聊天气泡样式）
+   - Footer 深色底部
+   - 全Apple系统字体栈，灰白主色调
+   - 响应式适配（手机/平板/桌面）
+4. 部署修复 & 全链路验证通过：
+   - Vercel 前端：https://chinatravel-guides.vercel.app
+   - Railway 后端：运行中，DeepSeek API 对话正常
 
 ## 待办
-- [ ] 本地启动后端验证：./venv/Scripts/python.exe -m uvicorn backend.app.main:app --reload
-- [ ] 用浏览器打开 frontend/index.html 测试聊天
-- [ ] 检查 Railway 构建日志是否通过
-- [ ] 在 Railway Variables 面板添加 DEEPSEEK_API_KEY
-- [ ] 在 Railway Settings -> Public Networking 启用域名
-- [ ] 测试 https://域名/docs 能否打开 FastAPI 文档
-- [ ] 修改 frontend/js/main.js 中 API 地址为 Railway 公网域名
+- [ ] 在本地打开 frontend/index.html 验证UI效果
+- [ ] 如有需要调整颜色/图片/文案
+- [ ] 后续推送到 GitHub 触发 Vercel 自动部署
 
 ## 关键决定
-- 前端采用 Vue 3 CDN（零构建工具），后端 FastAPI + DeepSeek
-- 后端流式输出采用 SSE 格式，前端用 fetch + ReadableStream 消费
-- main.js 中 API 地址通过 window.BACKEND_URL 配置
-- 样式采用蓝白色调（#2563eb 主色），卡片式聊天气泡
-- 根目录 requirements.txt 必须包含 uvicorn，Procfile 用 \
+- 前端 Vue 3 CDN（零构建工具），后端 FastAPI + DeepSeek
+- 配色从 #2563eb 蓝色 → Apple 灰白黑 (#1d1d1f / #f5f5f7 / #fff)
+- 版面结构：纯聊天 → 品牌落地页（Hero → 城市 → 签证 → 聊天 → Footer）
+- 聊天区使用 Unsplash 图片作为城市卡片配图
+- main.js 保留 SSE 流式消费逻辑，API 地址通过 window.BACKEND_URL 配置

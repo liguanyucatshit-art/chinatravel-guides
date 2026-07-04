@@ -48,6 +48,11 @@
 - **后端**：部署到 Railway，需在环境变量中配置 `DEEPSEEK_API_KEY`
 - **自定义域名**：通过 Vercel 后台绑定，DNS 配置 CNAME 记录
 
+### 2.4 API 设计约束
+- **RESTful 结构**：所有接口遵循 RESTful 设计规范
+- **请求格式**：统一使用 JSON 格式请求体
+- **流式响应**：长内容必须支持 SSE（Server-Sent Events）或分块流式输出
+
 ---
 
 ## 3. 项目文件结构
@@ -199,10 +204,17 @@ ________________________________________
 6.	绝不建议用户使用 WordPress，我们走自研路线。
 7.	部署相关操作，优先推荐 Vercel + Railway 组合，明确告知用户操作步骤。
 ________________________________________
+
+## 10. 编程原则
+- 保持架构简单可读，清晰优于抽象
+- 避免不必要的复杂度
+- 确保每个功能可在本地完整测试
+
+________________________________________
+
 9. 参考资料
 •	DeepSeek API 文档：https://platform.deepseek.com/api-docs
 •	FastAPI 官方文档：https://fastapi.tiangolo.com
 •	Vue 3 CDN 引入方式：https://unpkg.com/vue@3/dist/vue.global.js
 •	Vercel 部署静态站点：https://vercel.com/docs/deployments
 •	Railway 部署 Python 应用：https://docs.railway.com/guides/python
-
