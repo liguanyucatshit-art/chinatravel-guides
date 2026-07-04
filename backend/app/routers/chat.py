@@ -1,3 +1,4 @@
+from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -11,6 +12,21 @@ router = APIRouter()
 class ChatRequest(BaseModel):
     question: str
     system_prompt: Optional[str] = None  # 前端可传入自定义 system prompt
+
+
+def get_current_time_context() -> str:
+    """返回当前北京时间的时间上下文，插入到用户问题前。"""
+    beijing_tz = timezone(timedelta(hours=8))
+    now = datetime.now(beijing_tz)
+    weekday_cn = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    weekday = weekday_cn[now.weekday()]
+    time_str = now.strftime("%H:%M")
+    date_str = now.strftime("%Y-%m-%d")
+
+    return (
+        f"[Current time: {date_str} {weekday} {time_str} CST (China Standard Time, UTC+8). "
+        f"Use this to plan the user's schedule realistically.]\n\n"
+    )
 
 
 @router.post("/api/chat")
@@ -38,7 +54,11 @@ async def chat(request: ChatRequest):
             "Never judge cultures. Always interpret and explain cultures as lived experience. You are a bridge, not an evaluator."
         )
 
-    result = await call_deepseek(request.question, system_prompt=request.system_prompt, stream=True)
+    # 在用户问题前注入当前北京时间
+    time_context = get_current_time_context()
+    enriched_question = time_context + request.question
+
+    result = await call_deepseek(enriched_question, system_prompt=request.system_prompt, stream=True)
 
     # 如果返回的是错误信息
     if isinstance(result, list) and len(result) == 1 and result[0].get("type") == "error":
