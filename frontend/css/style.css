@@ -670,3 +670,39 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ===== Chat Bubble 格式化排版 ===== */
+/* 气泡内加粗的地点名称——大字号、换行 */
+.msg-bubble .loc-name {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.msg-bubble .loc-name:first-child {
+  margin-top: 0;
+}
+
+/* 解释说明文字——退格缩进 */
+.msg-bubble .explain {
+  display: block;
+  padding-left: 1.2em;
+  color: #6e6e73;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.msg--assistant .msg-bubble .explain {
+  color: #6e6e73;
+}
+
+/* 普通段落换行间距 */
+.msg-bubble br {
+  content: "";
+  display: block;
+  margin: 4px 0;
+}

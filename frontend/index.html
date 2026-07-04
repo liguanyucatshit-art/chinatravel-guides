@@ -114,17 +114,17 @@
 
         <!-- 聊天界面 -->
         <div class="chat-container">
-          <div class="chat-messages" ref="chatArea">
+          <div class="chat-messages" ref="chatArea" @scroll="onChatScroll">
             <!-- 消息列表 -->
             <div v-if="messages.length > 0" class="msg-list">
               <div v-for="(msg, idx) in messages" :key="idx" class="msg-row" :class="'msg--' + msg.role">
                 <div class="msg-avatar">{{ msg.role === 'user' ? '👤' : '✈️' }}</div>
-                <div class="msg-bubble">{{ msg.content }}</div>
+                <div class="msg-bubble" v-html="formatContent(msg.content)"></div>
               </div>
               <!-- 流式输出 -->
               <div v-if="streaming" class="msg-row msg--assistant">
                 <div class="msg-avatar">✈️</div>
-                <div class="msg-bubble msg-bubble--streaming">{{ streamingText }}<span class="cursor">|</span></div>
+                <div class="msg-bubble msg-bubble--streaming" v-html="formatContent(streamingText)"><span class="cursor">|</span></div>
               </div>
             </div>
 
