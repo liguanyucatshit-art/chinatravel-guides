@@ -1,5 +1,5 @@
 // ========== 配置 ==========
-const API_URL = (window.BACKEND_URL || "http://localhost:8000") + "/api/chat";
+const API_URL = (window.BACKEND_URL || "https://chinatravel-guides-production.up.railway.app") + "/api/chat";
 
 // ========== TRANOVA AI System Prompt ==========
 const TRANOVA_BASE_PROMPT = `You are TRANOVA AI, a local cultural travel companion.
