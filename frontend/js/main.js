@@ -128,12 +128,36 @@ function formatAIOutput(text) {
 
 // ========== 示例城市数据 ==========
 const citiesData = [
-  { name: "Beijing", highlight: "Imperial palaces, hutongs, and the Great Wall", tags: ["History", "Culture", "Food"], img: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=400&q=80" },
-  { name: "Shanghai", highlight: "Futuristic skyline, art deco, and world-class dining", tags: ["Modern", "Shopping", "Nightlife"], img: "https://images.unsplash.com/photo-1537531383495-f8130c8f1cc6?w=400&q=80" },
-  { name: "Chengdu", highlight: "Spicy Sichuan cuisine, giant pandas, and tea houses", tags: ["Food", "Nature", "Culture"], img: "https://images.unsplash.com/photo-1609954115567-22ef1aa31c3c?w=400&q=80" },
-  { name: "Xi'an", highlight: "Terracotta Warriors, ancient city walls, and Muslim Quarter", tags: ["History", "Architecture"], img: "https://images.unsplash.com/photo-1624534539723-4ccb30676857?w=400&q=80" },
-  { name: "Guangzhou", highlight: "Cantonese cuisine, night markets, and historic temples", tags: ["Food", "Shopping"], img: "https://images.unsplash.com/photo-1574424693506-6db5a588fc88?w=400&q=80" },
-  { name: "Chongqing", highlight: "Spicy hotpot, mountain city views, and Yangtze cruises", tags: ["Food", "Scenery"], img: "https://images.unsplash.com/photo-1599733589046-10c7f0f8c0f8?w=400&q=80" },
+  { name: "Shanghai", highlight: "第一大入境口岸，240小时覆盖长三角联动", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1537531383495-f8130c8f1cc6?w=400&q=80" },
+  { name: "Beijing", highlight: "故宫/长城，历史文化核心目的地", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=400&q=80" },
+  { name: "Guangzhou", highlight: "广交会+商贸客流基本盘，大湾区枢纽", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1574424693506-6db5a588fc88?w=400&q=80" },
+  { name: "Shenzhen", highlight: "毗邻香港，240小时让入境深度游更方便", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1584931423298-c576fda5bd11?w=400&q=80" },
+  { name: "Chengdu", highlight: "大熊猫+美食，240小时可覆盖川西(九寨沟)", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1609954115567-22ef1aa31c3c?w=400&q=80" },
+  { name: "Xi'an", highlight: "兵马俑，欧美历史游首选", tags: ["Hot", "Visa-Free"], img: "https://images.unsplash.com/photo-1624534539723-4ccb30676857?w=400&q=80" },
+  { name: "Hangzhou", highlight: "西湖+古镇，东南亚游客增长最快之一", tags: ["Hot"], img: "https://images.unsplash.com/photo-1599571234909-29ed5e34c0d2?w=400&q=80" },
+  { name: "Chongqing", highlight: "洪崖洞/山城夜景，社交媒体热度居高不下", tags: ["Hot"], img: "https://images.unsplash.com/photo-1599733589046-10c7f0f8c0f8?w=400&q=80" },
+  { name: "Guilin", highlight: "漓江阳朔，传统观光型标杆", tags: ["Hot"], img: "https://images.unsplash.com/photo-1537531383495-f8130c8f1cc6?w=400&q=80" },
+  { name: "Kunming", highlight: "云南门户，240小时能走经典滇西北线", tags: ["Hot"], img: "https://images.unsplash.com/photo-1590664863008-6678e7c7d0c0?w=400&q=80" },
+  { name: "Sanya", highlight: "热带海滩度假，部分国家免签入境", tags: ["Hot"], img: "https://images.unsplash.com/photo-1540202404-a2f29016b523?w=400&q=80" },
+  { name: "Zhangjiajie", highlight: "韩国游客爆发式增长，阿凡达取景地", tags: ["Hot"], img: "https://images.unsplash.com/photo-1535025189520-5c1b23d2f1b8?w=400&q=80" },
+  { name: "Xiamen", highlight: "鼓浪屿+海滨城市，台湾/东南亚客源稳定", tags: ["Hot"], img: "https://images.unsplash.com/photo-1580745273985-717c38a75ffa?w=400&q=80" },
+  { name: "Suzhou", highlight: "古典园林+水乡古镇，日韩客群偏好高", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Nanjing", highlight: "六朝古都+夫子庙，高铁网络辐射广", tags: ["Hot"], img: "https://images.unsplash.com/photo-1590559899731-a382839e5549?w=400&q=80" },
+  { name: "Qingdao", highlight: "啤酒节+德式建筑+滨海度假", tags: ["Hot"], img: "https://images.unsplash.com/photo-1592136968227-5e8f6a8f3b0a?w=400&q=80" },
+  { name: "Lijiang", highlight: "古城+玉龙雪山，240小时可串联大理", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Dalian", highlight: "俄日建筑+滨海路，日韩俄客源稳", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Changsha", highlight: "茶颜悦色+文和友+橘子洲，东南亚年轻人新宠", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Wuhan", highlight: "黄鹤楼+长江游轮+樱花季，中部唯一入境枢纽", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Harbin", highlight: "冰雪大世界，俄式建筑，俄韩游客多", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Tianjin", highlight: "近北京+五大道洋楼，分流北京溢出客流", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Luoyang", highlight: "龙门石窟+牡丹花会，历史文化深度游", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Huangshan", highlight: "黄山风景区+徽派古村落，摄影爱好者多", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Dunhuang", highlight: "莫高窟+鸣沙山，丝绸之路核心目的地", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Xishuangbanna", highlight: "热带雨林+傣族文化，东南亚陆路客源", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Guiyang", highlight: "黄果树瀑布+少数民族村寨，小众深度游上升", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Lhasa", highlight: "布达拉宫+高原风光，探险/文化型游客", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Nanning", highlight: "东盟博览会+毗邻越南，东南亚陆路入境口", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
+  { name: "Hohhot", highlight: "草原+蒙古族文化，入境游新增长点", tags: ["Hot"], img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80" },
 ];
 
 // ========== 示例快速提问 ==========
@@ -308,3 +332,4 @@ const app = Vue.createApp({
 });
 
 app.mount("#app");
+
